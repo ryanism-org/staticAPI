@@ -61,6 +61,12 @@ jobs:
           access_token: ${{ github.token }}
       - name: Checkout 🛎️
         uses: actions/checkout@v2
+        
+      - name: Sigin to git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull
       
       - name: Compress Json Script 🔧
         run: |
