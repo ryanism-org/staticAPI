@@ -1,0 +1,75 @@
+name: Main
+'on': 
+  # schedule: [{cron: "0 * * * *"}]
+  [push]
+jobs:
+  member-count:
+    name: Member Count
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      
+      - name: Get current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: MM.DD.YYYY-HH-mm
+          utcOffset: "-06:00"
+      
+      - name: Sigin to git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      - name: Generate gsheet.json
+        env:
+          GSHEET_ID: ${{ secrets.GSHEET_ID }}
+        run: curl https://opensheet.elk.sh/$GSHEET_ID/Form%20Responses%201 >> gsheet.json
+          
+      - name: Count the amount of object
+        id: objects
+        run: |
+          jq '[.[] ."Submit Certificate (Optional)" | select( . != null )] |length' gsheet.json >> cert.txt
+          echo ::set-output name=num::$(jq '. | length' gsheet.json)
+          echo ::set-output name=cert::$(cat cert.txt)
+      
+      - name: Save Data to Member Json
+        run: | 
+          echo $(cat members/index.json | jq '.members = ${{ steps.objects.outputs.num }}') > members/index.json
+          echo $(cat members/index.json | jq '.cert = ${{ steps.objects.outputs.cert }}') > members/index.json
+          echo $(cat members/index.json | jq '.updatedOn = "${{ steps.current-time.outputs.formattedTime }}"') > members/index.json
+          jq . members/index.json >> pretty-member.json
+          mv pretty-member.json members/index.json
+      - name: Git Push
+        run: |
+          git add members/index.json
+          git commit -m "${{ steps.current-time.outputs.formattedTime }} - Update Member Count"
+          git push
+          
+  compress-json:
+    needs: member-count
+    name: Compress Json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      
+      - name: Compress Json Script 🔧
+        run: |
+          chmod +x compress-json.sh
+          ./compress-json.sh
+          
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: main
+          folder: .
+          
