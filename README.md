@@ -1,6 +1,6 @@
 # Ryanism.org Static APIs
 
-JSONs used Ryanism.org
+Static JSON Files used for [Ryanism.org](https://ryanism.org)
 
-* [Member Count](members/)
-* [Quotes](quotes/)
+* [Member Count](members/) - [Minify](members/min/)
+* [Quotes](quotes/) - [Minify](quotes/min/)
