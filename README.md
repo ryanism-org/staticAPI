@@ -14,6 +14,10 @@ Static JSON Files used for [Ryanism.org](https://ryanism.org)
 - [stedolan/jq](https://github.com/stedolan/jq)
 - [compress-json.sh](compress-json.sh)
 
+## How does it work?
+
+## Getting Started
+
 ## Authors
 
 - **[RyanistRyan](https://github.com/RyanistRyan)** - *Initial work*
