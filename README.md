@@ -2,8 +2,9 @@
 
 Static JSON Files used for [Ryanism.org](https://ryanism.org)
 
-* [Member Count](members/) - [Minify](members/min/)
-* [Quotes](quotes/) - [Minify](quotes/min/)
+* [Member Count](members/) - [Minify](members/min/) - [Readme.txt](members/readme.txt)
+* [Quotes](quotes/) - [Minify](quotes/min/) - [Readme.txt](quotes/readme.txt)
+* [Legacy Quotes](legacyquotes/) - [Minify](legacyquotes/min/) - [Readme.txt](legacyquotes/readme.txt)
 
 ## Built with
 - [GitHub Actions](https://github.com/features/actions)
