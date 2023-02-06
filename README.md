@@ -1,10 +1,10 @@
 # Ryanism.org Static APIs
 
-Ryanism.org Static APIs is a collection of static JSON files used for [Ryanism.org](https://ryanism.org). The files contain information such as member count, quotes, and legacy quotes.
+Ryanism.org Static APIs is a collection of static JSON files used for [Ryanism.org](https://ryanism.org).
 
-* [Member Count](members/) - [Minify](members/min/) - [Readme.txt](members/readme.txt)
-* [Quotes](quotes/) - [Minify](quotes/min/) - [Readme.txt](quotes/readme.txt)
-* [Legacy Quotes](legacyquotes/) - [Minify](legacyquotes/min/) - [Readme.txt](legacyquotes/readme.txt)
+* [Member Count](members/) - [Minify](members/min/) - [readme.txt](members/readme.txt)
+* [Quotes](quotes/) - [Minify](quotes/min/) - [readme.txt](quotes/readme.txt)
+* [Legacy Quotes](legacyquotes/) - [Minify](legacyquotes/min/) - [readme.txt](legacyquotes/readme.txt)
 
 ## Built with
 - [GitHub Actions](https://github.com/features/actions)
@@ -23,7 +23,36 @@ The Member Count file contains the number of members in the organization. The Qu
 
 ## Getting Started
 
-Getting started with the Ryanism.org Static APIs is simple. All you need to do is access the APIs using a web browser or a programming language that supports JSON. The data can then be retrieved and used as needed.
+Getting started with the Ryanism.org Static APIs is simple. You can access the APIs using a web browser or a programming language that supports JSON and retrieve the data as needed. The process is straightforward and can be done without any technical expertise.
+
+### Javascript
+
+```js
+fetch("https://staticapi.ryanism.org/members/")
+.then(response => response.json())
+.then(data => {
+  console.log(data);
+});
+ ```
+ 
+ ### Node
+ 
+ ```js
+const http = require('http');
+
+const options = {
+  host: 'staticapi.ryanism.org',
+  path: '/members'
+};
+
+const callback = (response) => {
+  let data = '';
+  response.on('data', (chunk) => { data += chunk; });
+  response.on('end', () => { console.log(JSON.parse(data)); });
+};
+
+http.request(options, callback).end();
+```
 
 ## Authors
 
@@ -34,7 +63,7 @@ See also the list of other [contributors](https://github.com/ryanism-org/staticA
 
 ## Contributing
 
-Pull requests are welcome. If you find any problem(s) in the staticAPI, feel free to submit an issue. This includes stuff like vulnerabilities, or even the most trivial issues (such as typoes.) If you know how to fix an issue, feel free to make a pull request for the issue. If you would like to suggest a feature or change, submit it as an issue as well or message us on [discord](https://ryanism.org/discord/); it will be given the appropriate tag once we have seen it. We love to discuss any major changes with you.
+Submit any issues or problems found in the static API on GitHub to notify the developers. This can be anything from security vulnerabilities to typos. If the you know how to fix the issue, they are encouraged to make a pull request to resolve it. If a you have a suggestion for a new feature or change, they can also submit it as an issue or reach out to the developers on [discord](https://ryanism.org/discord/) for further discussion. We welcome feedback and discussions about major changes.
 
 ## License ![badge](https://badgen.net/github/license/ryanism-org/staticAPI)
 
