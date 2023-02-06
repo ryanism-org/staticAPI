@@ -1,6 +1,6 @@
 # Ryanism.org Static APIs
 
-Static JSON Files used for [Ryanism.org](https://ryanism.org)
+Ryanism.org Static APIs is a collection of static JSON files used for [Ryanism.org](https://ryanism.org). The files contain information such as member count, quotes, and legacy quotes.
 
 * [Member Count](members/) - [Minify](members/min/) - [Readme.txt](members/readme.txt)
 * [Quotes](quotes/) - [Minify](quotes/min/) - [Readme.txt](quotes/readme.txt)
@@ -17,7 +17,13 @@ Static JSON Files used for [Ryanism.org](https://ryanism.org)
 
 ## How does it work?
 
+The APIs work by making use of these tools to retrieve and process the data, and then storing the data in the form of static JSON files. This makes it possible to access the data easily and efficiently, without the need for a server or a database.
+
+The Member Count file contains the number of members in the organization. The Quotes file contains a list of quotes, while the Legacy Quotes file contains quotes from previous versions. All the files can be minified for faster loading times.
+
 ## Getting Started
+
+Getting started with the Ryanism.org Static APIs is simple. All you need to do is access the APIs using a web browser or a programming language that supports JSON. The data can then be retrieved and used as needed.
 
 ## Authors
 
