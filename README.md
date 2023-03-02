@@ -2,11 +2,12 @@
 
 Ryanism.org Static APIs is a collection of static JSON files used for [Ryanism.org](https://ryanism.org).
 
-* [Member Count](members/) - [Minify](members/min/) - [readme.txt](members/readme.txt)
-* [Quotes](quotes/) - [Minify](quotes/min/) - [readme.txt](quotes/readme.txt)
-* [Legacy Quotes](legacyquotes/) - [Minify](legacyquotes/min/) - [readme.txt](legacyquotes/readme.txt)
+- [Member Count](members/) - [Minify](members/min/) - [readme.txt](members/readme.txt)
+- [Quotes](quotes/) - [Minify](quotes/min/) - [readme.txt](quotes/readme.txt)
+- [Legacy Quotes](legacyquotes/) - [Minify](legacyquotes/min/) - [readme.txt](legacyquotes/readme.txt)
 
 ## Built with
+
 - [GitHub Actions](https://github.com/features/actions)
   - [styfle/cancel-workflow-action](https://github.com/marketplace/actions/cancel-workflow-action)
   - [actions/checkout](https://github.com/marketplace/actions/checkout)
@@ -38,20 +39,23 @@ fetch("https://staticapi.ryanism.org/members/")
  ### Node
  
  ```js
-const http = require('http');
+const https = require('https');
 
 const options = {
-  host: 'staticapi.ryanism.org',
-  path: '/members'
+  hostname: 'staticapi.ryanism.org',
+  path: '/members/',
+  method: 'GET'
 };
 
-const callback = (response) => {
+const req = https.request(options, res => {
   let data = '';
-  response.on('data', (chunk) => { data += chunk; });
-  response.on('end', () => { console.log(JSON.parse(data)); });
-};
+  res.on('data', chunk => {  data += chunk; });
+  res.on('end', () => { console.log(JSON.parse(data)); });
+});
 
-http.request(options, callback).end();
+req.on('error', error => { console.error(error); });
+
+req.end();
 ```
 
 ## Authors
