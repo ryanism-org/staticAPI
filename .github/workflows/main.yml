@@ -28,7 +28,7 @@ jobs:
       - name: Generate gsheet.json
         env:
           GSHEET_ID: ${{ secrets.GSHEET_ID }}
-        run: curl https://opensheet.elk.sh/$GSHEET_ID/Form%20Responses%201 >> gsheet.json
+        run: curl https://opensheet.elk.sh/$GSHEET_ID/Join%20Form%20Responses >> gsheet.json
           
       - name: Count the amount of object
         id: objects
